@@ -16,6 +16,7 @@ data = {
     }
 
 df= pd.DataFrame(data)
+print("\nDataFrame:\n", df)
 
 media = np.mean(temperatura_array)
 print("\ntemperatura media da semnana", media)
