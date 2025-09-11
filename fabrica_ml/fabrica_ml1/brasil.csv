@@ -1,0 +1,21 @@
+temporada,rodada,time_casa,time_visitante,gols_casa,gols_visitante,posse_bola_casa,chutes_casa,chutes_visitante,escanteios_casa,escanteios_visitante,faltas_casa,faltas_visitante,cartoes_amarelos_casa,cartoes_amarelos_visitante,cartoes_vermelhos_casa,cartoes_vermelhos_visitante,resultado
+2023,1,Flamengo,São Paulo,2,1,58,15,8,7,3,12,15,2,3,0,0,vitoria_casa
+2023,1,Palmeiras,Corinthians,1,1,52,12,10,5,4,14,16,1,2,0,0,empate
+2023,1,Atlético-MG,Internacional,3,0,60,18,5,8,2,10,18,0,4,0,1,vitoria_casa
+2023,1,Fluminense,Santos,2,2,48,10,12,3,6,16,12,3,2,0,0,empate
+2023,1,Botafogo,Goiás,1,0,45,8,9,2,5,20,14,4,1,1,0,vitoria_casa
+2023,2,São Paulo,Palmeiras,0,2,44,7,14,2,8,15,11,2,1,0,0,vitoria_visitante
+2023,2,Corinthians,Flamengo,1,3,40,9,16,3,9,18,13,3,2,0,1,vitoria_visitante
+2023,2,Internacional,Fluminense,2,1,55,13,7,6,2,12,19,1,3,0,0,vitoria_casa
+2023,2,Santos,Botafogo,0,1,42,6,11,1,7,17,10,2,1,1,0,vitoria_visitante
+2023,2,Goiás,Atlético-MG,1,4,38,5,19,1,10,21,8,5,0,2,0,vitoria_visitante
+2023,3,Flamengo,Internacional,2,0,62,16,4,9,1,9,20,1,4,0,0,vitoria_casa
+2023,3,Palmeiras,Santos,3,1,59,14,6,7,2,11,16,0,2,0,0,vitoria_casa
+2023,3,Atlético-MG,Corinthians,2,1,57,15,7,8,3,13,15,2,3,0,0,vitoria_casa
+2023,3,Fluminense,Goiás,1,0,50,11,8,4,4,14,17,3,2,0,1,vitoria_casa
+2023,3,Botafogo,São Paulo,0,0,46,8,9,3,5,19,12,4,1,0,0,empate
+2023,4,São Paulo,Atlético-MG,1,2,47,10,13,4,7,16,14,2,2,0,0,vitoria_visitante
+2023,4,Corinthians,Botafogo,0,1,43,7,12,2,6,20,11,3,1,1,0,vitoria_visitante
+2023,4,Internacional,Palmeiras,1,1,53,12,10,5,4,15,18,1,3,0,0,empate
+2023,4,Santos,Flamengo,0,3,39,5,18,1,9,22,9,4,0,2,0,vitoria_visitante
+2023,4,Goiás,Fluminense,2,2,41,9,11,3,5,18,13,2,2,0,0,empate
