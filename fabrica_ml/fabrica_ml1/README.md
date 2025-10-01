@@ -1,72 +1,54 @@
 # ⚽ Previsão do Campeonato Brasileiro
 
-Este projeto é uma aplicação interativa desenvolvida em **Python** com **Streamlit** que utiliza técnicas de *Machine Learning* para prever:
+Este projeto utiliza **Machine Learning** com `scikit-learn` e `Streamlit` para prever:
 
-1. **Campeões por temporada** do Campeonato Brasileiro
-2. **Resultados de jogos individuais** (vitória da casa, empate ou vitória do visitante)
-
-Além disso, a aplicação permite salvar e carregar os modelos treinados para reuso posterior.
-
----
-
-## 🚀 Tecnologias Utilizadas
-
-* [Python 3.9+](https://www.python.org/)
-* [Streamlit](https://streamlit.io/) – Interface interativa
-* [Pandas](https://pandas.pydata.org/) – Manipulação de dados
-* [Scikit-learn](https://scikit-learn.org/stable/) – Modelagem de Machine Learning
-* [Joblib](https://joblib.readthedocs.io/) – Persistência dos modelos
+* O **campeão do Brasileirão** em cada temporada.
+* O **resultado de jogos individuais** com base em estatísticas.
+* Além disso, oferece ferramentas de **avaliação de modelos** e **gerenciamento (salvar/carregar)**.
 
 ---
 
-## 📂 Estrutura dos Dados (`brasil.csv`)
+## 🆚 Diferenças entre o código antigo e o novo
 
-O arquivo `brasil.csv` é essencial para o funcionamento da aplicação.
-Ele deve conter os registros de jogos do Campeonato Brasileiro, com a seguinte estrutura mínima:
+### Antigo
 
-| Coluna                 | Descrição                                                                |
-| ---------------------- | ------------------------------------------------------------------------ |
-| `temporada`            | Ano/temporada do campeonato                                              |
-| `time_casa`            | Nome do time mandante                                                    |
-| `time_visitante`       | Nome do time visitante                                                   |
-| `gols_casa`            | Gols marcados pelo time da casa                                          |
-| `gols_visitante`       | Gols marcados pelo time visitante                                        |
-| `resultado`            | Resultado do jogo: `"vitoria_casa"`, `"empate"` ou `"vitoria_visitante"` |
-| `posse_bola_casa`      | Percentual de posse de bola do time da casa                              |
-| `chutes_casa`          | Número de chutes do time da casa                                         |
-| `chutes_visitante`     | Número de chutes do time visitante                                       |
-| `escanteios_casa`      | Escanteios a favor do time da casa                                       |
-| `escanteios_visitante` | Escanteios a favor do visitante                                          |
-| `faltas_casa`          | Faltas cometidas pelo time da casa                                       |
-| `faltas_visitante`     | Faltas cometidas pelo time visitante                                     |
+* Apenas **Random Forest** para prever campeões e **Logistic Regression** para jogos.
+* Input simples: gols, posse, chutes, escanteios, faltas.
+* Avaliação limitada: só mostrava **acurácia**.
+* Sem **validação cruzada** nem ajuste de hiperparâmetros.
+* Menos recursos de análise (sem matriz de confusão, AUC, F1-score etc.).
 
-🔎 **Observação:**
+### Novo
 
-* Para a aba *Previsão de Campeões*, são utilizadas as colunas de gols e resultados para calcular pontos e saldo de gols.
-* Para a aba *Previsão de Jogos*, são utilizadas todas as estatísticas listadas acima.
+* **Novos pré-processamentos**:
+
+  * `ColumnTransformer`, `SimpleImputer`, `StandardScaler`.
+  * Criação de **features históricas** (médias de gols, % vitórias).
+* **Validação mais robusta**:
+
+  * `StratifiedKFold` + `cross_val_score`.
+  * Métricas adicionais: **F1-Score, AUC-ROC, Matriz de Confusão, Classification Report**.
+* **Mais abas na interface**:
+
+  * 🔹 Previsão de Campeões
+  * 🔹 Previsão de Jogos
+  * 🔹 Gerenciamento de Modelos (salvar/carregar)
+  * 🔹 **Análise dos Modelos** (novidade)
+* **Input do usuário atualizado**: agora inclui dados históricos (média de gols, % vitórias etc.).
+* Estrutura mais modular e profissional.
 
 ---
 
-## 📊 Funcionalidades
+## 📂 Estrutura do Projeto
 
-### 1. Previsão de Campeões
-
-* Calcula os pontos e saldo de gols por temporada.
-* Treina um modelo **Random Forest** para identificar o campeão.
-* Mostra a **acurácia** do modelo e a probabilidade de cada time ser campeão.
-* Exibe ranking e gráfico de barras por temporada.
-
-### 2. Previsão de Resultado de Jogo
-
-* Utiliza **Regressão Logística** para prever resultados individuais.
-* Permite que o usuário insira estatísticas do jogo (gols, chutes, posse de bola, etc.).
-* Retorna a previsão (vitória casa, empate ou vitória visitante) com probabilidades detalhadas.
-
-### 3. Gerenciamento de Modelos
-
-* Salvar modelos treinados (`.joblib`) para uso posterior.
-* Carregar modelos já salvos.
-* Visualizar status dos modelos disponíveis.
+```
+📦 previsao_brasileirao
+ ┣ 📜 brasil.csv              # Base de dados (necessária)
+ ┣ 📜 app.py                  # Código principal (Streamlit)
+ ┣ 📜 modelo_campeoes.joblib  # Modelo treinado para campeões (opcional)
+ ┣ 📜 modelo_jogos.joblib     # Modelo treinado para jogos (opcional)
+ ┣ 📜 README.md               # Documentação
+```
 
 ---
 
@@ -75,27 +57,19 @@ Ele deve conter os registros de jogos do Campeonato Brasileiro, com a seguinte e
 1. Clone o repositório:
 
    ```bash
-   git clone https://github.com/seuusuario/previsao-brasileirao.git
-   cd previsao-brasileirao
+   git clone https://github.com/usuario/previsao_brasileirao.git
+   cd previsao_brasileirao
    ```
 
-2. Crie um ambiente virtual (opcional, mas recomendado):
-
-   ```bash
-   python -m venv venv
-   source venv/bin/activate   # Linux/Mac
-   venv\Scripts\activate      # Windows
-   ```
-
-3. Instale as dependências:
+2. Instale as dependências:
 
    ```bash
    pip install -r requirements.txt
    ```
 
-4. Coloque o arquivo `brasil.csv` na raiz do projeto.
+3. Coloque o arquivo `brasil.csv` na raiz do projeto.
 
-5. Execute a aplicação:
+4. Execute o Streamlit:
 
    ```bash
    streamlit run app.py
@@ -103,22 +77,35 @@ Ele deve conter os registros de jogos do Campeonato Brasileiro, com a seguinte e
 
 ---
 
-## 📌 Requisitos
+## 📊 Funcionalidades
 
-O arquivo `requirements.txt` deve conter:
+### 🔹 Previsão de Campeões
 
-```
-streamlit
-pandas
-numpy
-scikit-learn
-joblib
-```
+* Treina um modelo **Random Forest** para prever o campeão de cada temporada.
+* Mostra **probabilidade de cada time ser campeão**.
+* Avaliação com acurácia, F1, AUC e validação cruzada.
+
+### 🔹 Previsão de Jogos
+
+* Treina um modelo de **Regressão Logística** com features históricas.
+* Permite ao usuário inserir estatísticas de casa e visitante.
+* Mostra o resultado previsto e as probabilidades.
+
+### 🔹 Gerenciamento de Modelos
+
+* Salvar e carregar modelos já treinados (`.joblib`).
+
+### 🔹 Análise dos Modelos
+
+* Exibe **matriz de confusão** e **relatório de classificação** para análise detalhada.
 
 ---
 
-## 📝 Observações
+## ⚠️ Observações Importantes
 
-* Certifique-se de que o **`brasil.csv`** contém as colunas necessárias.
-* Caso queira usar outra base de dados, adapte os nomes das colunas no código.
-* Os modelos são treinados a cada execução, mas podem ser salvos e recarregados para agilizar o processo.
+* O arquivo `brasil.csv` deve conter as colunas:
+
+  * `temporada`, `time_casa`, `time_visitante`, `resultado`
+  * Além de estatísticas como: `gols_casa`, `gols_visitante`, `posse_bola_casa`, `chutes_casa`, etc.
+* As features históricas são criadas automaticamente pelo código.
+* Certifique-se de usar dados consistentes para melhores previsões.
